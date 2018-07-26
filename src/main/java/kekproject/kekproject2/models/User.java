@@ -1,28 +1,47 @@
-package kekproject.kekproject2.entity;
+package kekproject.kekproject2.models;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
-
+@Entity
+@Table(name = "users")
 public class User {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "display_name")
+    @Column(name = "email", nullable = false)
     private String email;
+
+    @Column(name = "display_name", nullable = false)
     private String displayName;
+
+    @Column(name = "pass", nullable = false)
     private String pass;
+
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "dateOfBirth")
     private Date dateOfBirth;
+
+    @Column(name = "register_date", nullable = false)
     private Date registerDate;
+
+    @Column(name = "last_online")
     private Date lastOnline;
-    List<User> friends;
+
+    @OneToMany(mappedBy = "author")
     List<Comment> comments;
+
+    @OneToMany(mappedBy = "author")
     List<Post> posts;
 
 
@@ -30,7 +49,7 @@ public class User {
 
     }
 
-    public User(String email, String displayName, String pass, String firstName, String lastName, Date dateOfBirth, Date registerDate, Date lastOnline, List<User> friends, List<Comment> comments, List<Post> posts) {
+    public User(String email, String displayName, String pass, String firstName, String lastName, Date dateOfBirth, Date registerDate, Date lastOnline, List<Comment> comments, List<Post> posts) {
         this.email = email;
         this.displayName = displayName;
         this.pass = pass;
@@ -39,7 +58,6 @@ public class User {
         this.dateOfBirth = dateOfBirth;
         this.registerDate = registerDate;
         this.lastOnline = lastOnline;
-        this.friends = friends;
         this.comments = comments;
         this.posts = posts;
     }
@@ -114,14 +132,6 @@ public class User {
 
     public void setLastOnline(Date lastOnline) {
         this.lastOnline = lastOnline;
-    }
-
-    public List<User> getFriends() {
-        return friends;
-    }
-
-    public void setFriends(List<User> friends) {
-        this.friends = friends;
     }
 
     public List<Comment> getComments() {

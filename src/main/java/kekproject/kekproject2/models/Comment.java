@@ -1,30 +1,44 @@
-package kekproject.kekproject2.entity;
+package kekproject.kekproject2.models;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name= "comments")
+@Table(name = "comments")
 public class Comment {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "comment_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int authorId;
-    private int parenPostId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User author;
+
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post parenPostId;
+
+    @Column(name = "reply_id")
     private int replyTo;
-    @Column(name = "content")
+
+    @Column(name = "content", columnDefinition = "text", nullable = false, length = 3000)
     private String content;
+
+    @Column(name = "post_date", nullable = false)
     private Date postedOn;
+
+    @Column(name = "last_edit")
     private Date lastEdit;
+
+    @Column(name = "is_edited")
     private boolean isEdited;
 
     public Comment(){}
 
-    public Comment(int authorId, int parenPostId, int replyTo, String content, Date postedOn, Date lastEdit, boolean isEdited) {
-        this.authorId = authorId;
+    public Comment(User author, Post parenPostId, int replyTo, String content, Date postedOn, Date lastEdit, boolean isEdited) {
+        this.author = author;
         this.parenPostId = parenPostId;
         this.replyTo = replyTo;
         this.content = content;
@@ -41,19 +55,19 @@ public class Comment {
         this.id = id;
     }
 
-    public int getAuthorId() {
-        return authorId;
+    public User getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(int authorId) {
-        this.authorId = authorId;
+    public void setAuthorId(User author) {
+        this.author = author;
     }
 
-    public int getParenPostId() {
+    public Post getParenPostId() {
         return parenPostId;
     }
 
-    public void setParenPostId(int parenPostId) {
+    public void setParenPostId(Post parenPostId) {
         this.parenPostId = parenPostId;
     }
 

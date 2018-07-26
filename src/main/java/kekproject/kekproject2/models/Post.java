@@ -1,32 +1,45 @@
-package kekproject.kekproject2.entity;
+package kekproject.kekproject2.models;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+@Entity
+@Table(name = "posts")
 public class Post {
 
 
     @Id
-    @Column(name = "id")
+    @Column(name = "post_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int authorId;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private User author;
+
+    @Column(name = "title", columnDefinition = "VARCHAR", length = 300, nullable = false)
     private String title;
+
+    @Column(name = "content", columnDefinition = "TEXT", nullable = false)
     private String content;
+
+    @Column(name= "posted_on", nullable = false)
     private Date postedOn;
+
+    @Column(name = "last_edited")
     private Date lastEdit;
+
+    @Column(name = "is_edited")
     private boolean isEdited;
+
+    @OneToMany(mappedBy = "parenPostId")
     List<Comment> comments;
 
     public Post(){}
 
-    public Post(int authorId, String title, String content, Date postedOn, Date lastEdit, boolean isEdited, List<Comment> comments) {
-        this.authorId = authorId;
+    public Post(User author, String title, String content, Date postedOn, Date lastEdit, boolean isEdited, List<Comment> comments) {
+        this.author = author;
         this.title = title;
         this.content = content;
         this.postedOn = postedOn;
@@ -43,12 +56,12 @@ public class Post {
         this.id = id;
     }
 
-    public int getAuthorId() {
-        return authorId;
+    public User getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(int authorId) {
-        this.authorId = authorId;
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
     public String getTitle() {
