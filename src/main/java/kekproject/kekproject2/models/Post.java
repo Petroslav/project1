@@ -18,7 +18,7 @@ public class Post {
     @JoinColumn(name = "author_id")
     private User author;
 
-    @Column(name = "title", columnDefinition = "VARCHAR", length = 300, nullable = false)
+    @Column(name = "title", length = 300, nullable = false)
     private String title;
 
     @Column(name = "content", columnDefinition = "TEXT", nullable = false)
@@ -33,7 +33,7 @@ public class Post {
     @Column(name = "is_edited")
     private boolean isEdited;
 
-    @OneToMany(mappedBy = "parenPostId")
+    @OneToMany(mappedBy = "parenPost")
     List<Comment> comments;
 
     public Post(){}

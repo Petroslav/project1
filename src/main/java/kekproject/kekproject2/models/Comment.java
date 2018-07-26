@@ -18,7 +18,7 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "post_id")
-    private Post parenPostId;
+    private Post parenPost;
 
     @Column(name = "reply_id")
     private int replyTo;
@@ -37,9 +37,9 @@ public class Comment {
 
     public Comment(){}
 
-    public Comment(User author, Post parenPostId, int replyTo, String content, Date postedOn, Date lastEdit, boolean isEdited) {
+    public Comment(User author, Post parenPost, int replyTo, String content, Date postedOn, Date lastEdit, boolean isEdited) {
         this.author = author;
-        this.parenPostId = parenPostId;
+        this.parenPost = parenPost;
         this.replyTo = replyTo;
         this.content = content;
         this.postedOn = postedOn;
@@ -63,12 +63,12 @@ public class Comment {
         this.author = author;
     }
 
-    public Post getParenPostId() {
-        return parenPostId;
+    public Post getParenPost() {
+        return parenPost;
     }
 
-    public void setParenPostId(Post parenPostId) {
-        this.parenPostId = parenPostId;
+    public void setParenPost(Post parenPost) {
+        this.parenPost = parenPost;
     }
 
     public int getReplyTo() {
