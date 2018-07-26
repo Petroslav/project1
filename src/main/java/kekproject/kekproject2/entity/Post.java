@@ -1,4 +1,4 @@
-package models;
+package kekproject.kekproject2.entity;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;

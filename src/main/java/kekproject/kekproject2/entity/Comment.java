@@ -1,11 +1,10 @@
-package models;
+package kekproject.kekproject2.entity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name= "comments")
 public class Comment {
 
     @Id
@@ -16,6 +15,7 @@ public class Comment {
     private int authorId;
     private int parenPostId;
     private int replyTo;
+    @Column(name = "content")
     private String content;
     private Date postedOn;
     private Date lastEdit;
