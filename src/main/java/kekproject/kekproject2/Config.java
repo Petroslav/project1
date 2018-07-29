@@ -8,16 +8,19 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class Config {
 
+    public Config(){}
+
     @Bean
     public SessionFactory createFactory(){
         System.out.println("SessionFactory initialized successfully.");
-        SessionFactory factory = new org.hibernate.cfg.Configuration()
+        return new org.hibernate.cfg.Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(User.class)
                 .addAnnotatedClass(Post.class)
                 .addAnnotatedClass(Comment.class)
                 .addAnnotatedClass(Category.class)
                 .buildSessionFactory();
-        return factory;
     }
+
+
 }

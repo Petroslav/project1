@@ -8,7 +8,6 @@ import java.util.List;
 @Table(name = "posts")
 public class Post {
 
-
     @Id
     @Column(name = "post_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +37,7 @@ public class Post {
     private boolean isEdited;
 
     @OneToMany(mappedBy = "parenPost")
-    List<Comment> comments;
+    private List<Comment> comments;
 
     public Post(){}
 

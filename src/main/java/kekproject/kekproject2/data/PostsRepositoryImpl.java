@@ -37,7 +37,17 @@ public class PostsRepositoryImpl implements PostsRepository {
 
     @Override
     public Post getPostById(int postId) {
-        return null;
+        Post p = null;
+        try(Session s = session.openSession()){
+            s.beginTransaction();
+            p = s.get(Post.class, postId);
+            s.getTransaction().commit();
+            System.out.println("Post retrieved successfully.");
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return p;
     }
 
     @Override
