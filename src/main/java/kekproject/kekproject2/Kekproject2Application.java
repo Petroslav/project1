@@ -12,6 +12,8 @@ public class Kekproject2Application {
 
         SpringApplication.run(Kekproject2Application.class, args);
         //TODO питай пешо дали тези индекси реално са форен кий блят
+
+
     }
 
 }
