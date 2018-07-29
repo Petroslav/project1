@@ -1,10 +1,12 @@
 package kekproject.kekproject2.data;
 
 import kekproject.kekproject2.models.User;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -20,26 +22,95 @@ public class UsersRepositoryImpl implements UsersRepository {
 
     @Override
     public List<User> getAllUsers() {
-        return null;
+        List<User> users = new ArrayList<>();
+        try(Session s = session.openSession()){
+            s.beginTransaction();
+            users = s.createQuery("FROM User", User.class).list();
+            s.getTransaction().commit();
+            System.out.println("Users retrieved successfully.");
+        }catch(Exception e){
+            System.out.print(e.getMessage());
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    @Override
+    public List<User> getUsersDisplayName(String criteria) {
+        List<User> matches = new ArrayList<>();
+        try(Session s = session.openSession()){
+            s.beginTransaction();
+            matches = s.createQuery("FROM User WHERE displayName LIKE %" + criteria + "%", User.class).list();
+            s.getTransaction().commit();
+            System.out.println("Display names retrieved successfully.");
+        }catch(Exception e){
+            System.out.print(e.getMessage());
+            e.printStackTrace();
+        }
+        return matches;
     }
 
     @Override
     public User getUserByID(int id) {
-        return null;
+        User user = null;
+        try(Session s = session.openSession()){
+            s.beginTransaction();
+            s.get(User.class, id);
+            s.getTransaction().commit();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return user;
     }
 
     @Override
     public User getUserByEmail(String email) {
-        return null;
+        User user = null;
+        try(Session s = session.openSession()){
+            s.beginTransaction();
+            s.createQuery("FROM User WHERE email = " + email);
+            s.getTransaction().commit();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return user;
     }
 
     @Override
     public boolean registerUser(User u) {
-        return false;
+        try(Session s = session.openSession()){
+            s.beginTransaction();
+            s.save(u);
+            s.getTransaction().commit();
+            return true;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public boolean UpdateUser(User u) {
-        return false;
+        try(Session s = session.openSession()){
+            s.beginTransaction();
+            s.update(u);
+            s.getTransaction().commit();
+            return true;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public SessionFactory getSession() {
+        return session;
+    }
+
+    public void setSession(SessionFactory session) {
+        this.session = session;
     }
 }
