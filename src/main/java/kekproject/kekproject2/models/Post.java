@@ -21,11 +21,15 @@ public class Post {
     @Column(name = "title", length = 300, nullable = false)
     private String title;
 
-    @Column(name = "content", columnDefinition = "TEXT", nullable = false)
+    @Column(name = "content", columnDefinition = "TEXT", length = 3000, nullable = false)
     private String content;
 
     @Column(name= "posted_on", nullable = false)
     private Date postedOn;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     @Column(name = "last_edited")
     private Date lastEdit;
@@ -38,11 +42,12 @@ public class Post {
 
     public Post(){}
 
-    public Post(User author, String title, String content, Date postedOn, Date lastEdit, boolean isEdited, List<Comment> comments) {
+    public Post(User author, String title, String content, Date postedOn, Category category, Date lastEdit, boolean isEdited, List<Comment> comments) {
         this.author = author;
         this.title = title;
         this.content = content;
         this.postedOn = postedOn;
+        this.category = category;
         this.lastEdit = lastEdit;
         this.isEdited = isEdited;
         this.comments = comments;
@@ -86,6 +91,14 @@ public class Post {
 
     public void setPostedOn(Date postedOn) {
         this.postedOn = postedOn;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public Date getLastEdit() {

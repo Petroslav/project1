@@ -16,6 +16,7 @@ public class Config {
                 .addAnnotatedClass(User.class)
                 .addAnnotatedClass(Post.class)
                 .addAnnotatedClass(Comment.class)
+                .addAnnotatedClass(Category.class)
                 .buildSessionFactory();
         return factory;
     }
