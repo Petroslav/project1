@@ -3,10 +3,12 @@ package kekproject.kekproject2.data;
 import kekproject.kekproject2.models.Comment;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class CommentsRepositoryImpl implements CommentsRepository {
 
     private SessionFactory session;
@@ -53,7 +55,7 @@ public class CommentsRepositoryImpl implements CommentsRepository {
         try(Session s = session.openSession()){
             s.beginTransaction();
             c = s.get(Comment.class, commentId);
-            s.getTransaction().commit();;
+            s.getTransaction().commit();
             System.out.println("Comment retrieved successfully.");
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -67,7 +69,7 @@ public class CommentsRepositoryImpl implements CommentsRepository {
         try(Session s = session.openSession()){
             s.beginTransaction();
             s.save(c);
-            s.getTransaction().commit();;
+            s.getTransaction().commit();
             System.out.println("Comment saved successfully.");
             return true;
         }catch (Exception e){
@@ -82,7 +84,7 @@ public class CommentsRepositoryImpl implements CommentsRepository {
         try(Session s = session.openSession()){
             s.beginTransaction();
             s.update(c);
-            s.getTransaction().commit();;
+            s.getTransaction().commit();
             System.out.println("Comment updated successfully.");
             return true;
         }catch (Exception e){
@@ -97,7 +99,7 @@ public class CommentsRepositoryImpl implements CommentsRepository {
         try(Session s = session.openSession()){
             s.beginTransaction();
             int rows = s.createQuery("DELETE FROM Comment WHERE id = " + commentId).executeUpdate();
-            s.getTransaction().commit();;
+            s.getTransaction().commit();
             if(rows != 0){
                 System.out.println("Comment deleted successfully.");
                 return true;
