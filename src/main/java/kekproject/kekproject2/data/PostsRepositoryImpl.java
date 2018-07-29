@@ -36,6 +36,21 @@ public class PostsRepositoryImpl implements PostsRepository {
     }
 
     @Override
+    public List<Post> getAllFromCategory(int categoryId) {
+        List<Post> posts = new ArrayList<>();
+        try(Session s = session.openSession()){
+            s.beginTransaction();
+            posts = s.createQuery("FROM Post WHERE category = " + categoryId, Post.class).list();
+            s.getTransaction().commit();
+            System.out.println("Posts from category retrieved successfully.");
+        }catch(Exception e){
+            System.out.print(e.getMessage());
+            e.printStackTrace();
+        }
+        return posts;
+    }
+
+    @Override
     public Post getPostById(int postId) {
         Post p = null;
         try(Session s = session.openSession()){
@@ -52,17 +67,54 @@ public class PostsRepositoryImpl implements PostsRepository {
 
     @Override
     public boolean addNewPost(Post p) {
-        return false;
+        try(Session s = session.openSession()){
+            s.beginTransaction();
+            s.save(p);
+            s.getTransaction().commit();
+            System.out.println("Post saved successfully.");
+            return true;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+
     }
 
     @Override
     public boolean updatePost(Post p) {
-        return false;
+        try(Session s = session.openSession()){
+            s.beginTransaction();
+            s.update(p);
+            s.getTransaction().commit();
+            System.out.println("Post updated successfully.");
+            return true;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+
     }
 
     @Override
     public boolean deletePost(int postId) {
-        return false;
+        try(Session s = session.openSession()){
+            s.beginTransaction();
+            int rows = s.createQuery("DELETE FROM Post WHERE id = " + postId, Post.class).executeUpdate();
+            rows += s.createQuery("DELETE FROM Comment WHERE author = " + postId).executeUpdate();
+            s.getTransaction().commit();
+            if(rows > 0){
+                System.out.println("Post deleted successfully.");
+            }else{
+                System.out.println("Could not find post.");
+            }
+            return true;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public SessionFactory getSession() {
