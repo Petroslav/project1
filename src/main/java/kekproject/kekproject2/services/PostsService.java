@@ -7,8 +7,9 @@ import java.util.List;
 public interface PostsService {
 
     List<Post> getAll();
+    List<Post> getAllFromCategory(int categoryId);
     Post getPostById(int postId);
     boolean addNewPost(Post p);
     boolean updatePost(Post p);
-    boolean deletePost(int postId);
+    boolean deletePost(Post p);
 }

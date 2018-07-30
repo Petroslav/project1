@@ -11,5 +11,5 @@ public interface PostsRepository {
     Post getPostById(int postId);
     boolean addNewPost(Post p);
     boolean updatePost(Post p);
-    boolean deletePost(int postId);
+    boolean deletePost(Post p);
 }

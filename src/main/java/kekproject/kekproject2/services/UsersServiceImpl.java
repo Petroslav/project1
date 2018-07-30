@@ -20,27 +20,33 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public List<User> getAllUsers() {
+
         return repository.getAllUsers();
     }
 
     @Override
+    public List<User> getUsersDisplayName(String criteria) {
+        return repository.getUsersDisplayName(criteria);
+    }
+
+    @Override
     public User getUserByID(int id) {
-        return null;
+        return repository.getUserByID(id);
     }
 
     @Override
     public User getUserByEmail(String email) {
-        return null;
+        return repository.getUserByEmail(email);
     }
 
     @Override
     public boolean registerUser(User u) {
-        return false;
+        return repository.registerUser(u);
     }
 
     @Override
-    public boolean UpdateUser(User u) {
-        return false;
+    public boolean updateUser(User u) {
+        return repository.updateUser(u);
     }
 
     public UsersRepository getRepository() {

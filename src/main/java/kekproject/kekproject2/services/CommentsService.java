@@ -11,5 +11,5 @@ public interface CommentsService {
     Comment getCommentById(int commentId);
     boolean saveComment(Comment c);
     boolean updateComment(Comment c);
-    boolean deleteComment(int commentId);
+    boolean deleteComment(Comment c);
 }

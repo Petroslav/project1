@@ -4,8 +4,6 @@ import kekproject.kekproject2.models.User;
 import kekproject.kekproject2.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -27,22 +25,22 @@ public class UserController {
 
     @GetMapping("/{id}")
     public User getUserByID(@PathVariable("id") String strid) {
-        return null;
+        return service.getUserByID(Integer.parseInt(strid));
     }
 
     @GetMapping("/{email}")
-    public User getUserByEmail(String email) {
-        return null;
+    public User getUserByEmail(@PathVariable("email") String email) {
+        return service.getUserByEmail(email);
     }
 
     @PutMapping("/register")
     public boolean createUser(@RequestBody User user) {
-        return true;
+        return service.registerUser(user);
     }
 
     @PutMapping("/update")
     public boolean updateUser(User u) {
-        return false;
+        return service.updateUser(u);
     }
 
     public UsersService getService() {

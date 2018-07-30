@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public class UsersRepositoryImpl implements UsersRepository {
 
-    SessionFactory session;
+    private SessionFactory session;
 
     @Autowired
     public UsersRepositoryImpl(SessionFactory session) {
@@ -93,7 +93,7 @@ public class UsersRepositoryImpl implements UsersRepository {
     }
 
     @Override
-    public boolean UpdateUser(User u) {
+    public boolean updateUser(User u) {
         try(Session s = session.openSession()){
             s.beginTransaction();
             s.update(u);

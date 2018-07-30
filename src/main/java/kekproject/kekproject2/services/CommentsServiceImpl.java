@@ -3,9 +3,11 @@ package kekproject.kekproject2.services;
 import kekproject.kekproject2.data.CommentsRepository;
 import kekproject.kekproject2.models.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CommentsServiceImpl implements CommentsService {
 
     private CommentsRepository repository;
@@ -18,31 +20,31 @@ public class CommentsServiceImpl implements CommentsService {
 
     @Override
     public List<Comment> getAll() {
-        return null;
+        return repository.getAll();
     }
 
     @Override
     public List<Comment> getUserComments(int authorId) {
-        return null;
+        return repository.getUserComments(authorId);
     }
 
     @Override
     public Comment getCommentById(int commentId) {
-        return null;
+        return repository.getCommentById(commentId);
     }
 
     @Override
     public boolean saveComment(Comment c) {
-        return false;
+        return repository.saveComment(c);
     }
 
     @Override
     public boolean updateComment(Comment c) {
-        return false;
+        return repository.updateComment(c);
     }
 
     @Override
-    public boolean deleteComment(int commentId) {
-        return false;
+    public boolean deleteComment(Comment c) {
+        return repository.deleteComment(c);
     }
 }

@@ -95,18 +95,13 @@ public class CommentsRepositoryImpl implements CommentsRepository {
     }
 
     @Override
-    public boolean deleteComment(int commentId) {
+    public boolean deleteComment(Comment c) {
         try(Session s = session.openSession()){
             s.beginTransaction();
-            int rows = s.createQuery("DELETE FROM Comment WHERE id = " + commentId).executeUpdate();
+            s.delete(c);
             s.getTransaction().commit();
-            if(rows != 0){
-                System.out.println("Comment deleted successfully.");
-                return true;
-            }else{
-                System.out.println("Could not find comment");
-                return false;
-            }
+            System.out.println("Comment deleted successfully.");
+            return true;
         }catch (Exception e){
             System.out.println(e.getMessage());
             e.printStackTrace();

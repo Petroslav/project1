@@ -1,9 +1,9 @@
 package kekproject.kekproject2.models;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -29,27 +29,27 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "dateOfBirth")
-    private Date dateOfBirth;
+    @Column(name = "date_of_birth")
+    private LocalDate dateOfBirth;
 
     @Column(name = "register_date", nullable = false)
-    private Date registerDate;
+    private LocalDate registerDate;
 
     @Column(name = "last_online")
     private Date lastOnline;
 
     @OneToMany(mappedBy = "author")
-    List<Comment> comments;
+    private List<Comment> comments;
 
     @OneToMany(mappedBy = "author")
-    List<Post> posts;
+    private List<Post> posts;
 
 
     public User(){
 
     }
 
-    public User(String email, String displayName, String pass, String firstName, String lastName, Date dateOfBirth, Date registerDate, Date lastOnline, List<Comment> comments, List<Post> posts) {
+    public User(String email, String displayName, String pass, String firstName, String lastName, LocalDate dateOfBirth, LocalDate registerDate, Date lastOnline) {
         this.email = email;
         this.displayName = displayName;
         this.pass = pass;
@@ -58,8 +58,6 @@ public class User {
         this.dateOfBirth = dateOfBirth;
         this.registerDate = registerDate;
         this.lastOnline = lastOnline;
-        this.comments = comments;
-        this.posts = posts;
     }
 
     public int getId() {
@@ -110,19 +108,19 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Date getRegisterDate() {
+    public LocalDate getRegisterDate() {
         return registerDate;
     }
 
-    public void setRegisterDate(Date registerDate) {
+    public void setRegisterDate(LocalDate registerDate) {
         this.registerDate = registerDate;
     }
 

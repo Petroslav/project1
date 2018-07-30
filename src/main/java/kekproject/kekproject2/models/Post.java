@@ -26,7 +26,7 @@ public class Post {
     @Column(name= "posted_on", nullable = false)
     private Date postedOn;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
@@ -36,7 +36,9 @@ public class Post {
     @Column(name = "is_edited")
     private boolean isEdited;
 
-    @OneToMany(mappedBy = "parenPost")
+    @OneToMany(mappedBy = "parenPost",
+                cascade = CascadeType.ALL,
+                orphanRemoval = true)
     private List<Comment> comments;
 
     public Post(){}

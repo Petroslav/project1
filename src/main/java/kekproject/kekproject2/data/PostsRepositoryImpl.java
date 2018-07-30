@@ -98,17 +98,12 @@ public class PostsRepositoryImpl implements PostsRepository {
     }
 
     @Override
-    public boolean deletePost(int postId) {
+    public boolean deletePost(Post p) {
         try(Session s = session.openSession()){
             s.beginTransaction();
-            int rows = s.createQuery("DELETE FROM Post WHERE id = " + postId, Post.class).executeUpdate();
-            rows += s.createQuery("DELETE FROM Comment WHERE author = " + postId).executeUpdate();
+            s.delete(p);
             s.getTransaction().commit();
-            if(rows > 0){
-                System.out.println("Post deleted successfully.");
-            }else{
-                System.out.println("Could not find post.");
-            }
+            System.out.println("Post deleted successfully.");
             return true;
         }catch(Exception e){
             System.out.println(e.getMessage());
