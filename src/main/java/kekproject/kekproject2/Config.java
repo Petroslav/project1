@@ -8,8 +8,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class Config {
 
-    public Config(){}
-
     @Bean
     public SessionFactory createFactory(){
         System.out.println("SessionFactory initialized successfully.");
