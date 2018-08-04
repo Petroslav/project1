@@ -1,6 +1,7 @@
 package kekproject.kekproject2.data;
 
 import kekproject.kekproject2.models.User;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,12 @@ public class UsersRepositoryImpl implements UsersRepository {
     @Override
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
-        try(Session s = session.openSession()){
+        Session s = null;
+        try{
+            s = session.openSession();
             s.beginTransaction();
-            users = s.createQuery("FROM User", User.class).list();
+            Query query = s.createQuery("FROM User");
+            users = query.list();
             s.getTransaction().commit();
             System.out.println("Users retrieved successfully.");
         }catch(Exception e){
@@ -38,9 +42,11 @@ public class UsersRepositoryImpl implements UsersRepository {
     @Override
     public List<User> getUsersDisplayName(String criteria) {
         List<User> matches = new ArrayList<>();
-        try(Session s = session.openSession()){
+        Session s = null;
+        try{
+            s = session.openSession();
             s.beginTransaction();
-            matches = s.createQuery("FROM User WHERE displayName LIKE %" + criteria + "%", User.class).list();
+            matches = s.createQuery("FROM User WHERE displayName LIKE %" + criteria + "%").list();
             s.getTransaction().commit();
             System.out.println("Display names retrieved successfully.");
         }catch(Exception e){
@@ -53,9 +59,11 @@ public class UsersRepositoryImpl implements UsersRepository {
     @Override
     public User getUserByID(int id) {
         User user = null;
-        try(Session s = session.openSession()){
+        Session s = null;
+        try{
+            s = session.openSession();
             s.beginTransaction();
-            user = s.get(User.class, id);
+            user = (User) s.get(User.class, id);
             s.getTransaction().commit();
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -66,7 +74,9 @@ public class UsersRepositoryImpl implements UsersRepository {
 
     @Override
     public boolean registerUser(User u) {
-        try(Session s = session.openSession()){
+        Session s = null;
+        try{
+            s = session.openSession();
             s.beginTransaction();
             s.save(u);
             s.getTransaction().commit();
@@ -80,7 +90,9 @@ public class UsersRepositoryImpl implements UsersRepository {
 
     @Override
     public boolean updateUser(User u) {
-        try(Session s = session.openSession()){
+        Session s = null;
+        try{
+            s = session.openSession();
             s.beginTransaction();
             s.update(u);
             s.getTransaction().commit();
