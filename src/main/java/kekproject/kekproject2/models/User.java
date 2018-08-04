@@ -28,15 +28,15 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "date_of_birth")
-    private LocalDate dateOfBirth;
-
-    @Column(name = "register_date", nullable = false)
-    private LocalDate registerDate;
-
-    @Column(name = "last_online")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastOnline;
+//    @Column(name = "date_of_birth")
+//    private LocalDate dateOfBirth;
+//
+//    @Column(name = "register_date", nullable = false)
+//    private LocalDate registerDate;
+//
+//    @Column(name = "last_online")
+//    @Temporal(TemporalType.DATE)
+//    private Date lastOnline;
 
 //    @OneToMany(mappedBy = "author")
 //    private List<Comment> comments;
@@ -53,9 +53,9 @@ public class User {
         this.pass = pass;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.dateOfBirth = dateOfBirth;
-        this.registerDate = registerDate;
-        this.lastOnline = lastOnline;
+//        this.dateOfBirth = dateOfBirth;
+//        this.registerDate = registerDate;
+//        this.lastOnline = lastOnline;
     }
 
     public int getId() {
@@ -106,29 +106,29 @@ public class User {
         this.lastName = lastName;
     }
 
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public LocalDate getRegisterDate() {
-        return registerDate;
-    }
-
-    public void setRegisterDate(LocalDate registerDate) {
-        this.registerDate = registerDate;
-    }
-
-    public Date getLastOnline() {
-        return lastOnline;
-    }
-
-    public void setLastOnline(Date lastOnline) {
-        this.lastOnline = lastOnline;
-    }
+//    public LocalDate getDateOfBirth() {
+//        return dateOfBirth;
+//    }
+//
+//    public void setDateOfBirth(LocalDate dateOfBirth) {
+//        this.dateOfBirth = dateOfBirth;
+//    }
+//
+//    public LocalDate getRegisterDate() {
+//        return registerDate;
+//    }
+//
+//    public void setRegisterDate(LocalDate registerDate) {
+//        this.registerDate = registerDate;
+//    }
+//
+//    public Date getLastOnline() {
+//        return lastOnline;
+//    }
+//
+//    public void setLastOnline(Date lastOnline) {
+//        this.lastOnline = lastOnline;
+//    }
     //    public List<Comment> getComments() {
 //        return comments;
 //    }

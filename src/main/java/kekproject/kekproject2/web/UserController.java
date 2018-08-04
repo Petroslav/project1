@@ -45,7 +45,7 @@ public class UserController {
         u.setDisplayName("sad");
         u.setPass("123asd");
         u.setEmail("wat@abv.bg");
-        u.setRegisterDate(LocalDate.now());
+//        u.setRegisterDate(LocalDate.now());
         if(service.registerUser(u)){
             return "redirect:/all";
         }

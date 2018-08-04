@@ -17,11 +17,11 @@
         </property>
 
         <property name = "hibernate.connection.username">
-            swag
+            root
         </property>
 
         <property name = "hibernate.connection.password">
-            1
+
         </property>
 
     </session-factory>

@@ -23,9 +23,11 @@ public class PostsRepositoryImpl implements PostsRepository {
     @Override
     public List<Post> getAll() {
         List<Post> posts = new ArrayList<>();
-        try(Session s = session.openSession()){
+        Session s = null;
+        try{
+            s = session.openSession();
             s.beginTransaction();
-            posts = s.createQuery("FROM Post", Post.class).list();
+            posts = s.createQuery("FROM Post").list();
             s.getTransaction().commit();
             System.out.println("Posts retrieved successfully.");
         }catch(Exception e){
@@ -38,9 +40,11 @@ public class PostsRepositoryImpl implements PostsRepository {
     @Override
     public List<Post> getAllFromCategory(int categoryId) {
         List<Post> posts = new ArrayList<>();
-        try(Session s = session.openSession()){
+        Session s = null;
+        try{
+            s = session.openSession();
             s.beginTransaction();
-            posts = s.createQuery("FROM Post WHERE category = " + categoryId, Post.class).list();
+            posts = s.createQuery("FROM Post WHERE category = " + categoryId).list();
             s.getTransaction().commit();
             System.out.println("Posts from category retrieved successfully.");
         }catch(Exception e){
@@ -53,9 +57,11 @@ public class PostsRepositoryImpl implements PostsRepository {
     @Override
     public Post getPostById(int postId) {
         Post p = null;
-        try(Session s = session.openSession()){
+        Session s = null;
+        try{
+            s = session.openSession();
             s.beginTransaction();
-            p = s.get(Post.class, postId);
+            p = (Post) s.get(Post.class, postId);
             s.getTransaction().commit();
             System.out.println("Post retrieved successfully.");
         }catch(Exception e){
@@ -67,7 +73,9 @@ public class PostsRepositoryImpl implements PostsRepository {
 
     @Override
     public boolean addNewPost(Post p) {
-        try(Session s = session.openSession()){
+        Session s = null;
+        try{
+            s = session.openSession();
             s.beginTransaction();
             s.save(p);
             s.getTransaction().commit();
@@ -83,7 +91,9 @@ public class PostsRepositoryImpl implements PostsRepository {
 
     @Override
     public boolean updatePost(Post p) {
-        try(Session s = session.openSession()){
+        Session s = null;
+        try{
+            s = session.openSession();
             s.beginTransaction();
             s.update(p);
             s.getTransaction().commit();
@@ -99,7 +109,9 @@ public class PostsRepositoryImpl implements PostsRepository {
 
     @Override
     public boolean deletePost(Post p) {
-        try(Session s = session.openSession()){
+        Session s = null;
+        try{
+            s = session.openSession();
             s.beginTransaction();
             s.delete(p);
             s.getTransaction().commit();

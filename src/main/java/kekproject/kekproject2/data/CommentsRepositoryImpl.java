@@ -21,9 +21,11 @@ public class CommentsRepositoryImpl implements CommentsRepository {
     @Override
     public List<Comment> getAll() {
         List<Comment> comments = new ArrayList<>();
-        try(Session s = session.openSession()){
+        Session s = null;
+        try{
+            s = session.openSession();
             s.beginTransaction();
-            comments = s.createQuery("FROM Comment", Comment.class).list();
+            comments = s.createQuery("FROM Comment").list();
             s.getTransaction().commit();
             System.out.println("Comments retrieved successfully.");
         }catch(Exception e){
@@ -36,9 +38,11 @@ public class CommentsRepositoryImpl implements CommentsRepository {
     @Override
     public List<Comment> getUserComments(int authorId) {
         List<Comment> userComments = new ArrayList<>();
-        try(Session s = session.openSession()){
+        Session s = null;
+        try{
+            s = session.openSession();
             s.beginTransaction();
-            userComments = s.createQuery("FROM Comment WHERE author = " + authorId, Comment.class).list();
+            userComments = s.createQuery("FROM Comment WHERE author = " + authorId).list();
             s.getTransaction().commit();
             System.out.println("User comments retrieved successfully.");
         }catch(Exception e){
@@ -52,9 +56,11 @@ public class CommentsRepositoryImpl implements CommentsRepository {
     @Override
     public Comment getCommentById(int commentId) {
         Comment c = null;
-        try(Session s = session.openSession()){
+        Session s = null;
+        try{
+            s = session.openSession();
             s.beginTransaction();
-            c = s.get(Comment.class, commentId);
+            c = (Comment) s.get(Comment.class, commentId);
             s.getTransaction().commit();
             System.out.println("Comment retrieved successfully.");
         }catch (Exception e){
@@ -66,7 +72,9 @@ public class CommentsRepositoryImpl implements CommentsRepository {
 
     @Override
     public boolean saveComment(Comment c) {
-        try(Session s = session.openSession()){
+        Session s = null;
+        try{
+            s = session.openSession();
             s.beginTransaction();
             s.save(c);
             s.getTransaction().commit();
@@ -81,7 +89,9 @@ public class CommentsRepositoryImpl implements CommentsRepository {
 
     @Override
     public boolean updateComment(Comment c){
-        try(Session s = session.openSession()){
+        Session s = null;
+        try{
+            s = session.openSession();
             s.beginTransaction();
             s.update(c);
             s.getTransaction().commit();
@@ -96,7 +106,9 @@ public class CommentsRepositoryImpl implements CommentsRepository {
 
     @Override
     public boolean deleteComment(Comment c) {
-        try(Session s = session.openSession()){
+        Session s = null;
+        try{
+            s = session.openSession();
             s.beginTransaction();
             s.delete(c);
             s.getTransaction().commit();
