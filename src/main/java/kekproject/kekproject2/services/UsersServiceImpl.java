@@ -35,11 +35,6 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public User getUserByEmail(String email) {
-        return repository.getUserByEmail(email);
-    }
-
-    @Override
     public boolean registerUser(User u) {
         return repository.registerUser(u);
     }

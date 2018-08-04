@@ -55,21 +55,7 @@ public class UsersRepositoryImpl implements UsersRepository {
         User user = null;
         try(Session s = session.openSession()){
             s.beginTransaction();
-            s.get(User.class, id);
-            s.getTransaction().commit();
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-        return user;
-    }
-
-    @Override
-    public User getUserByEmail(String email) {
-        User user = null;
-        try(Session s = session.openSession()){
-            s.beginTransaction();
-            s.createQuery("FROM User WHERE email = " + email);
+            user = s.get(User.class, id);
             s.getTransaction().commit();
         }catch (Exception e){
             System.out.println(e.getMessage());

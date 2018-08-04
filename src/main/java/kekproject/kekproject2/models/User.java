@@ -3,7 +3,6 @@ package kekproject.kekproject2.models;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -36,18 +35,17 @@ public class User {
     private LocalDate registerDate;
 
     @Column(name = "last_online")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date lastOnline;
 
-    @OneToMany(mappedBy = "author")
-    private List<Comment> comments;
+//    @OneToMany(mappedBy = "author")
+//    private List<Comment> comments;
+//
+//    @OneToMany(mappedBy = "author")
+//    private List<Post> posts;
 
-    @OneToMany(mappedBy = "author")
-    private List<Post> posts;
 
-
-    public User(){
-
-    }
+    public User(){}
 
     public User(String email, String displayName, String pass, String firstName, String lastName, LocalDate dateOfBirth, LocalDate registerDate, Date lastOnline) {
         this.email = email;
@@ -131,21 +129,20 @@ public class User {
     public void setLastOnline(Date lastOnline) {
         this.lastOnline = lastOnline;
     }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public List<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
-    }
+    //    public List<Comment> getComments() {
+//        return comments;
+//    }
+//
+//    public void setComments(List<Comment> comments) {
+//        this.comments = comments;
+//    }
+//
+//    public List<Post> getPosts() {
+//        return posts;
+//    }
+//
+//    public void setPosts(List<Post> posts) {
+//        this.posts = posts;
+//    }
 }
 

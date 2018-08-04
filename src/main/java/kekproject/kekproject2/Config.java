@@ -19,6 +19,4 @@ public class Config {
                 .addAnnotatedClass(Category.class)
                 .buildSessionFactory();
     }
-
-
 }
